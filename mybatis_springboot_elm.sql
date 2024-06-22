@@ -251,7 +251,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `userId` int NOT NULL COMMENT '用户编号',
+  `userId` int NOT NULL AUTO_INCREMENT COMMENT '用户编号',
   `password` varchar(64) NOT NULL COMMENT '密码',
   `userName` varchar(20) NOT NULL COMMENT '用户名称',
   `userSex` int NOT NULL DEFAULT '1' COMMENT '用户性别（1：男； 0：女）',
@@ -260,7 +260,7 @@ CREATE TABLE `user` (
   `phoneNum` varchar(20) DEFAULT NULL,
   `state` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,4 +305,4 @@ INSERT INTO `user_identity` VALUES (1,1,1,'2024-06-03 23:09:32',0),(2,1,2,'2024-
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-13 14:27:00
+-- Dump completed on 2024-06-22 15:09:28
