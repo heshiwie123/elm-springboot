@@ -16,24 +16,24 @@ import java.util.List;
 public class DeliveryAddressServiceImpl extends ServiceImpl<DeliveryAddressMapper, DeliveryAddress>implements DeliveryAddressService {
     @Resource
     DeliveryAddressMapper deliveryAddressMapper;
-    LambdaQueryWrapper<DeliveryAddress> queryWrapper = new LambdaQueryWrapper<DeliveryAddress>();
-    LambdaUpdateWrapper<DeliveryAddress> updateWrapper = new LambdaUpdateWrapper<DeliveryAddress>();
+
+
     @Override
     public List<DeliveryAddress> listDeliveryAddressByUserId(Integer userId) {
         log.info("listDeliveryAddressByUserId:userId====================>{}",userId);
+        LambdaQueryWrapper<DeliveryAddress> queryWrapper = new LambdaQueryWrapper<DeliveryAddress>();
        queryWrapper.eq(DeliveryAddress::getUserId,userId);
         List<DeliveryAddress> deliveryAddresses= deliveryAddressMapper.selectList(queryWrapper);
-        queryWrapper.clear();
         return deliveryAddresses;
     }
 
     @Override
     public DeliveryAddress getDeliveryAddressById(Integer daId) {
         log.info("getDeliveryAddressById:daId====================>{}",daId);
+        LambdaQueryWrapper<DeliveryAddress> queryWrapper = new LambdaQueryWrapper<DeliveryAddress>();
         queryWrapper.eq(DeliveryAddress::getDaId,daId);
         DeliveryAddress deliveryAddress= deliveryAddressMapper.selectOne(queryWrapper);
         log.info("deliveryAddress:==========================>{}",deliveryAddress);
-        queryWrapper.clear();
         return deliveryAddress;
     }
 
@@ -45,12 +45,10 @@ public class DeliveryAddressServiceImpl extends ServiceImpl<DeliveryAddressMappe
 
     @Override
     public int updateDeliveryAddress(DeliveryAddress deliveryAddress) {
-        updateWrapper.clear();
         log.info("updateDeliveryAddress:deliveryAddress====================>{}",deliveryAddress);
+        LambdaUpdateWrapper<DeliveryAddress> updateWrapper = new LambdaUpdateWrapper<DeliveryAddress>();
         updateWrapper.eq(DeliveryAddress::getDaId,deliveryAddress.getDaId());
-        int res= deliveryAddressMapper.update(deliveryAddress,updateWrapper);
-        updateWrapper.clear();
-        return res;
+        return deliveryAddressMapper.update(deliveryAddress,updateWrapper);
     }
 
     @Override

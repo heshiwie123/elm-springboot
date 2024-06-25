@@ -26,7 +26,7 @@ public class UserController {
         Map<String,Object> userInfo = userService.getUserByPhoneByPass(userRequestDto);
 
         if(userInfo == null){
-            return ResponseResult.errorResult(AppHttpCodeEnum.LOGIN_PASSWORD_ERROR);
+            return ResponseResult.errorResult(500,"用户名或密码错误");
 
         }else {
             return new ResponseResult(200,"登录成功",userInfo);

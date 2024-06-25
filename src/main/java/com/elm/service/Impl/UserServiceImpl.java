@@ -28,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private AuthenticationManager authenticationManager;
     @Resource
     UserMapper userMapper;
-    LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<User>();
+
 
     @Override
     public Map<String,Object> getUserByPhoneByPass(UserRequestDto userRequestDto) {
@@ -85,12 +85,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public int getUserExistByPhone(String phoneNum) {
         log.info("getUserById:phoneNum==================>{}", phoneNum);
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<User>();
         queryWrapper.eq(User::getPhoneNum, phoneNum);
-        queryWrapper.select(User::getUserId);
+        queryWrapper.select(true,User::getUserId);
         int res = userMapper.selectList(queryWrapper).size();
         log.info("getUserById:res==================>{}", res);
-        //queryWrapper晴空，否则会queryWrapper留存在内存中，出现 WHERE (userId = ? AND userId = ? AND userId = ?)
-        queryWrapper.clear();
         return res;
     }
 
@@ -104,7 +103,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         log.info("getUserById:res==================>{}", res);
         //这里根据用户号码，给用户添加默认的普通用户身份
         userMapper.userDefaultIdentity(user.getPhoneNum());
-        queryWrapper.clear();
         return res;
     }
 }

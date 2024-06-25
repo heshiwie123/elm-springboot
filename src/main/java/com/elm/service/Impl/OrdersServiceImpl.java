@@ -27,7 +27,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     private OrderDetailetService orderDetailetService;
     @Resource
     FoodMapper foodMapper;
-    LambdaQueryWrapper<Orders> queryWrapper = new LambdaQueryWrapper<Orders>();
+
     @Override
     public int createOrders(Orders orders) {
         save(orders);
@@ -36,6 +36,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
     @Override
     public OrdersListDto getOrdersById(Integer orderId) {
+        LambdaQueryWrapper<Orders> queryWrapper = new LambdaQueryWrapper<Orders>();
         OrdersListDto ordersResponseDto=new OrdersListDto();
        queryWrapper.eq(Orders::getOrderId,orderId);
        Orders orders= ordersMapper.selectOne(queryWrapper);
@@ -50,6 +51,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
     @Override
     public List<OrdersListDto> listOrdersByUserId(Integer userId) {
+        LambdaQueryWrapper<Orders> queryWrapper = new LambdaQueryWrapper<Orders>();
         List<OrdersListDto> ordersListDtos=new ArrayList<>();
         queryWrapper.eq(Orders::getUserId,userId);
 

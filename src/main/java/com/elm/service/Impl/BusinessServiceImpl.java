@@ -18,7 +18,7 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     @Resource
     BusinessMapper businessMapper;
 
-    LambdaQueryWrapper<Business> queryWrapper=new LambdaQueryWrapper<Business>();
+
 
     /**
      listBusinessByOrderTypeId
@@ -26,9 +26,9 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     @Override
     public List<Business> listBusinessByOrderTypeId(Integer orderTypeId) {
         log.info("listBusinessByOrderTypeId:orderTypeId：=============================》{}",orderTypeId);
+        LambdaQueryWrapper<Business> queryWrapper=new LambdaQueryWrapper<Business>();
         queryWrapper.eq(Business::getOrderTypeId,orderTypeId);
         List<Business> businesses= businessMapper.selectList(queryWrapper);
-        queryWrapper.clear();
         return businesses;
     }
 
@@ -38,9 +38,9 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     @Override
     public Business getBusinessById(Integer businessId) {
         log.info("getBusinessById:businessId：=============================》{}",businessId);
+        LambdaQueryWrapper<Business> queryWrapper=new LambdaQueryWrapper<Business>();
         queryWrapper.eq(Business::getBusinessId,businessId);
         Business business= businessMapper.selectOne(queryWrapper);
-        queryWrapper.clear();
         return business;
     }
 }

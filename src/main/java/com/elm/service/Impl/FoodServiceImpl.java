@@ -15,14 +15,13 @@ import java.util.List;
 public class FoodServiceImpl extends ServiceImpl<FoodMapper, Food> implements FoodService {
     @Resource
     FoodMapper foodMapper;
-    LambdaQueryWrapper<Food> queryWrapper = new LambdaQueryWrapper<Food>();
+
     @Override
     public List<Food> listFoodByBusinessId(Integer businessId) {
         log.info("listFoodByBusinessId:businessId===================>{}",businessId);
+        LambdaQueryWrapper<Food> queryWrapper = new LambdaQueryWrapper<Food>();
         queryWrapper.eq(Food::getBusinessId,businessId);
-
         List<Food> foodList= foodMapper.selectList(queryWrapper);
-        queryWrapper.clear();
         return foodList;
     }
 }
