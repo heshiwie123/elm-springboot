@@ -55,7 +55,7 @@ public class  SttAuthorizationManager implements AuthorizationManager<RequestAut
         }
         //拿到对应权限
         String perms=menu.getPerms();
-        log.info("路径需要的权限=======================>{}",perms);
+        log.info("路径需要权限=======================>{}",perms);
         if(perms==null||perms.trim().equals("")){
             //直接通过,因为此接口路径不需要权限
             return new AuthorizationDecision(true);
@@ -66,7 +66,7 @@ public class  SttAuthorizationManager implements AuthorizationManager<RequestAut
         for (GrantedAuthority authority : authorities) {
             //authority类型为GrantedAuthority，转化为String
             String userPerms = authority.getAuthority();
-            log.info("用户的权限=======================>{}",userPerms);
+            log.info("用户权限=======================>{}",userPerms);
             if(userPerms.equals(perms)){
                 return new AuthorizationDecision(true);
             }

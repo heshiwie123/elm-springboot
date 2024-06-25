@@ -29,7 +29,7 @@ public class OrdersController {
 
     @GetMapping("/getOrdersById")
     public ResponseResult getOrdersById(Integer orderId) throws Exception{
-        OrdersResponseDto ordersResponseDto= ordersService.getOrdersById(orderId);
+        OrdersListDto ordersResponseDto= ordersService.getOrdersById(orderId);
         Map<String,Object> map=new HashMap<>();
         map.put("ordersResponseDto",ordersResponseDto);
         return new ResponseResult(200,map);

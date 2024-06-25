@@ -46,7 +46,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return null;
         }
         //获取返回的用户
-        User user = (User) authenticate.getPrincipal();
+        User user =  new User();
+        user = (User) authenticate.getPrincipal();
         log.info("登录后的用户=======》{}", user);
         if (user == null) {
             return null;

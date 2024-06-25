@@ -25,10 +25,11 @@ public class UserController {
     public ResponseResult getUserByPhoneByPass(@RequestBody UserRequestDto userRequestDto) {
         Map<String,Object> userInfo = userService.getUserByPhoneByPass(userRequestDto);
 
-        if(userInfo.get("token")!=null){
-            return new ResponseResult(200,"登录成功",userInfo);
-        }else {
+        if(userInfo == null){
             return ResponseResult.errorResult(AppHttpCodeEnum.LOGIN_PASSWORD_ERROR);
+
+        }else {
+            return new ResponseResult(200,"登录成功",userInfo);
         }
     }
 

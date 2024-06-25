@@ -36,7 +36,7 @@ public class CartController {
     public ResponseResult saveCart(@RequestBody Cart cart) throws Exception{
         int res= cartService.saveCart(cart);
         if(res!=0){
-            return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
+            return ResponseResult.okResult(res);
         }
         return ResponseResult.errorResult(AppHttpCodeEnum.FAILED);
     }
@@ -46,7 +46,7 @@ public class CartController {
         int res= cartService.updateCart(cart);
 
         if (res!=0){
-            return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
+            return ResponseResult.okResult(res);
         }
         return ResponseResult.errorResult(AppHttpCodeEnum.FAILED);
     }

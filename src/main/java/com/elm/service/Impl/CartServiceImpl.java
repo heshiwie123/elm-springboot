@@ -26,7 +26,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper,Cart> implements Car
     @Resource
     private BusinessMapper businessMapper;
 
-    LambdaUpdateWrapper<Cart> updateWrapper = new LambdaUpdateWrapper<Cart>();
+
     @Override
     public List<CartResponseDto> listCart(ListCartDto listCartDto) {
         List<Cart> cartList;
@@ -61,11 +61,13 @@ public class CartServiceImpl extends ServiceImpl<CartMapper,Cart> implements Car
     public int saveCart(Cart cart) {
         //直接保存，需要有所需要素
         log.info("saveCart:======================>{}",cart);
-       return cartMapper.insert(cart);
+       cartMapper.insert(cart);
+       return cart.getCartId();
     }
 
     @Override
     public int updateCart(Cart cart) {
+        LambdaUpdateWrapper<Cart> updateWrapper = new LambdaUpdateWrapper<Cart>();
         //先筛选，再更新
         //根据cartId
         log.info("updateCart:======================{}",cart);
@@ -73,17 +75,15 @@ public class CartServiceImpl extends ServiceImpl<CartMapper,Cart> implements Car
         updateWrapper.eq(Cart::getFoodId,cart.getFoodId());
         updateWrapper.eq(Cart::getBusinessId,cart.getBusinessId());
         updateWrapper.set(true,Cart::getQuantity,cart.getQuantity());
-        int res= cartMapper.update(cart,updateWrapper);
-        updateWrapper.clear();
-        return res;
+        cartMapper.update(cart,updateWrapper);
+        return cart.getCartId();
     }
 
     @Override
     public int removeCart(Integer cartId) {
         log.info("removeCart:cartId======================{}",cartId);
+        LambdaUpdateWrapper<Cart> updateWrapper = new LambdaUpdateWrapper<Cart>();
         updateWrapper.eq(Cart::getCartId,cartId);
-        int  res=  cartMapper.delete(updateWrapper);
-        updateWrapper.clear();
-        return res;
+        return cartMapper.delete(updateWrapper);
     }
 }

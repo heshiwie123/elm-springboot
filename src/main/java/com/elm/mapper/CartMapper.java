@@ -14,18 +14,18 @@ public interface CartMapper extends BaseMapper<Cart> {
      */
     public List<Cart> listCart(@Param("userId") Integer userId,@Param("businessId") Integer businessId);
 
-    /**
-     saveCart
-     */
-    public int saveCart(Cart cart);
-
-    /**
-     updateCart
-     */
-    public int updateCart(Cart cart);
-
-    /**
-     removeCart
-     */
-    public int removeCart(Cart cart);
+//    /**
+//     saveCart
+//     */
+//    public int saveCart(Cart cart);
+//
+//    /**
+//     updateCart
+//     */
+//    public int updateCart(Cart cart);
+//
+//    /**
+//     removeCart
+//     */
+//    public int removeCart(Cart cart);
 }
