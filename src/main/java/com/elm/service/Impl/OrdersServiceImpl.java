@@ -30,7 +30,6 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     LambdaQueryWrapper<Orders> queryWrapper = new LambdaQueryWrapper<Orders>();
     @Override
     public int createOrders(Orders orders) {
-
         save(orders);
         return orders.getOrderId();
     }
