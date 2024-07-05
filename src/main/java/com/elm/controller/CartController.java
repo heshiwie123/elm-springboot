@@ -52,12 +52,11 @@ public class CartController {
     }
 
     @PostMapping("/removeCart")
-
     public ResponseResult removeCart(@Param("cartId") Integer cartId) throws Exception{
         int res= cartService.removeCart(cartId);
         if(res!=0){
-            return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
+            return ResponseResult.okResult(200,"删除成功");
         }
-        return ResponseResult.errorResult(AppHttpCodeEnum.FAILED);
+        return ResponseResult.errorResult(500,"删除失败");
     }
 }

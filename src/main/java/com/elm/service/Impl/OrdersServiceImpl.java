@@ -45,7 +45,6 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
         ordersResponseDto.setBusiness(businessMapper.selectById(orders.getBusinessId()));
         ordersResponseDto.setList(orderDetailetService.listOrderDetailetByOrderId(orderId));
-       queryWrapper.clear();
        return ordersResponseDto;
     }
 

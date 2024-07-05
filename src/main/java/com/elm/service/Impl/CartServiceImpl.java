@@ -74,7 +74,6 @@ public class CartServiceImpl extends ServiceImpl<CartMapper,Cart> implements Car
         updateWrapper.eq(Cart::getUserId,cart.getUserId());
         updateWrapper.eq(Cart::getFoodId,cart.getFoodId());
         updateWrapper.eq(Cart::getBusinessId,cart.getBusinessId());
-        updateWrapper.set(true,Cart::getQuantity,cart.getQuantity());
         cartMapper.update(cart,updateWrapper);
         return cart.getCartId();
     }
@@ -84,6 +83,8 @@ public class CartServiceImpl extends ServiceImpl<CartMapper,Cart> implements Car
         log.info("removeCart:cartId======================{}",cartId);
         LambdaUpdateWrapper<Cart> updateWrapper = new LambdaUpdateWrapper<Cart>();
         updateWrapper.eq(Cart::getCartId,cartId);
-        return cartMapper.delete(updateWrapper);
+        int res =  cartMapper.delete(updateWrapper);
+        log.info("removeCart:res======================{}",res);
+        return res;
     }
 }
